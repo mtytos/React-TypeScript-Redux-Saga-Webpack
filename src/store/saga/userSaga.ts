@@ -1,29 +1,29 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
-import {AUsersFailed, AUsersSuccess} from "../user/action";
+import {AUserFailed, AUserSuccess} from "../user/action";
 
-const apiUrl = `https://jsonplaceholder.typicode.com/users`;
+const apiUrl = `https://jsonplaceholder.typicode.com/users/1`;
 function getApi() {
 	return fetch(apiUrl, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
-
 		}
-	}).then(response => response.json())
-		.catch((error) => {throw error})
+	})
+		.then(res => res.json())
+		.catch(err => {throw err})
 }
 
-function* fetchUsers() {
+function* fetchUser() {
 	try {
-		const users = yield call(getApi);
-		yield put(AUsersSuccess(users));
+		const user = yield call(getApi);
+		yield put(AUserSuccess(user));
 	} catch (e) {
-		yield put(AUsersFailed(e.message));
+		yield put(AUserFailed(e.message));
 	}
 }
 
 function* userSaga() {
-	yield takeEvery('GET_USERS_REQUESTED', fetchUsers);
+	yield takeEvery('GET_USER_REQUESTED', fetchUser);
 }
 
 export default userSaga;

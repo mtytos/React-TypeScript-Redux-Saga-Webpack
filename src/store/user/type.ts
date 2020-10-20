@@ -1,26 +1,55 @@
-export const GET_USERS_REQUESTED = 'GET_USERS_REQUESTED';
-export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
-export const GET_USERS_FAILED = 'GET_USERS_FAILED';
+export const GET_USER_REQUESTED = 'GET_USER_REQUESTED';
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
+export const GET_USER_FAILED = 'GET_USER_FAILED';
 
+export type User = {
+	address: Address,
+	company: Company,
+	email: string,
+	id: number,
+	name: string,
+	phone: string,
+	username: string,
+	website: string,
+}
 
-export interface IUserState {
-	user: any[],
+type Address = {
+	city: string
+	geo: Geo,
+	street: string
+	suite: string
+	zipcode: string
+}
+
+type Geo = {
+	lat: string
+	lng: string
+}
+
+type Company = {
+	bs: string
+	catchPhrase:string
+	name: string
+}
+
+export type UserState = {
+	user: User | null,
 	loading: boolean,
-	error: any,
+	error: string | null,
 }
 
-export interface IGetUsers {
-	type: typeof GET_USERS_REQUESTED,
+export interface IGetUser {
+	type: typeof GET_USER_REQUESTED,
 }
 
-export interface IUsersSuccess {
-	type: typeof GET_USERS_SUCCESS,
-	users: any
+export interface IUserSuccess {
+	type: typeof GET_USER_SUCCESS,
+	user: any
 }
 
-export interface IUsersFailed {
-	type: typeof GET_USERS_FAILED,
+export interface IUserFailed {
+	type: typeof GET_USER_FAILED,
 	message: string
 }
 
-export type ConfigActionTypes = IGetUsers | IUsersSuccess | IUsersFailed;
+export type ConfigActionTypes = IGetUser | IUserSuccess | IUserFailed;

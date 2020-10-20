@@ -1,10 +1,10 @@
 import React from 'react';
-import Users from "./component/UserM";
+import UserM from "./component/UserM";
 
 function App() {
   return (
     <div className="App">
-      <Users />
+      <UserM />
     </div>
   );
 }
