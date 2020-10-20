@@ -1,25 +1,25 @@
-import { IUserState, ConfigActionTypes, GET_USERS_REQUESTED, GET_USERS_SUCCESS, GET_USERS_FAILED } from './type';
+import { UserState, ConfigActionTypes, GET_USER_REQUESTED, GET_USER_SUCCESS, GET_USER_FAILED } from './type';
 
-const initialState: IUserState = {
-	user: [],
+const initialState: UserState = {
+	user: null,
 	loading: false,
 	error: null
 }
 
-export function users(state = initialState, action: ConfigActionTypes): IUserState {
+export function user(state = initialState, action: ConfigActionTypes): UserState {
 	switch (action.type) {
-		case GET_USERS_REQUESTED:
+		case GET_USER_REQUESTED:
 			return {
 				...state,
 				loading: true,
 			}
-		case GET_USERS_SUCCESS:
+		case GET_USER_SUCCESS:
 			return {
 				...state,
 				loading: false,
-				user: action.users
+				user: action.user
 			}
-		case GET_USERS_FAILED:
+		case GET_USER_FAILED:
 			return {
 				...state,
 				loading: false,

@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { FC } from 'react';
+import { User } from '../store/user/type';
 
-export const CardM = (props: any) => {
+export const CardM: FC<{user: User}> = ({ user }) => {
 	return (
 		<div>
-			<h5>{props.user.name}</h5>
-			<h6>{props.user.company.name}</h6>
-			<p>{props.user.company.catchPhrase}</p>
+			<h5>{user.name}</h5>
+			<h6>{user.phone}</h6>
+			<p>{user.email}</p>
 			<hr/>
 		</div>
 	);

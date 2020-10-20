@@ -1,21 +1,21 @@
-import { ConfigActionTypes, GET_USERS_REQUESTED, GET_USERS_SUCCESS, GET_USERS_FAILED } from './type';
+import { ConfigActionTypes, GET_USER_REQUESTED, GET_USER_SUCCESS, GET_USER_FAILED } from './type';
 
-export function AGetUsers (): ConfigActionTypes {
+export function AGetUser (): ConfigActionTypes {
 	return {
-		type: GET_USERS_REQUESTED
+		type: GET_USER_REQUESTED
 	}
 }
 
-export function AUsersSuccess (users: any): ConfigActionTypes {
+export function AUserSuccess (user: any): ConfigActionTypes {
 	return {
-		type: GET_USERS_SUCCESS,
-		users: users
+		type: GET_USER_SUCCESS,
+		user: user
 	}
 }
 
-export function AUsersFailed (message: string): ConfigActionTypes {
+export function AUserFailed (message: string): ConfigActionTypes {
 	return {
-		type: GET_USERS_FAILED,
+		type: GET_USER_FAILED,
 		message: message
 	}
 }
