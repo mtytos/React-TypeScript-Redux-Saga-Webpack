@@ -1,29 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {RootState} from "../store";
-import { AGetUsers } from '../store/user/action';
+import { RootState } from '../store';
+import { User } from '../store/user/type';
+import { AGetUser } from '../store/user/action';
 import { CardM } from './Card';
 
-const Users = () => {
+const UserM: FC<{ }> = () => {
 	const dispatch = useDispatch();
-	const user = useSelector<RootState, any>(state => state.users.user);
-	const loading = useSelector<RootState, any>(state => state.users.loading);
-	const error = useSelector<RootState, any>(state => state.users.error);
+	const user = useSelector<RootState, User | null>(state => state.user.user);
+	const loading = useSelector<RootState, boolean>(state => state.user.loading);
+	const error = useSelector<RootState, string | null>(state => state.user.error);
 
 	useEffect(() => {
-		dispatch(AGetUsers());
+		dispatch(AGetUser());
 	}, [])
+
+	const isNotErrAndLoad = () => {
+		return !loading && !error
+	}
 
 	return (
 		<>
-			{user.loading && <p>Loading...</p>}
-			{user.length === 0 && !loading && <p>No users available!</p>}
+			{loading && <p>Loading...</p>}
 			{error && !loading && <p>{error}</p>}
-			{user.length > 0 && user.map((user1: any) => (
-				<CardM key={user1.id} user={user1} />
-			))}
+			{isNotErrAndLoad() && user && <CardM key={user.id} user={user} />}
 		</>
 	)
 }
 
-export default Users;
+export default UserM;
